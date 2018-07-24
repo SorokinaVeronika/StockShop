@@ -9,8 +9,11 @@ namespace StockShop.StockShopDAL
     public interface IEntity<T>
     {
         T GetEntity(int id);
+
         void CreateEntity(T entity);
+
         void UpdateEntity(T entity);
+
         void DeleteEntity(int id);
     }
 }
