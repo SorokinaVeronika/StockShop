@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2a3d3c55330e472494994a3e3249b433" Name="Diagram1">
+        <EntityTypeShape EntityType="StockShopModel.Category" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="StockShopModel.Employee" Width="1.5" PointX="7.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StockShopModel.Income" Width="1.5" PointX="7.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="StockShopModel.Log_income" Width="1.5" PointX="5.375" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="StockShopModel.Log_outcome" Width="1.5" PointX="5.375" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="StockShopModel.Outcome" Width="1.5" PointX="2.625" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StockShopModel.Position" Width="1.5" PointX="9.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StockShopModel.Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="StockShopModel.Unity" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="StockShopModel.FK__Product__id_cate__74794A92" ManuallyRouted="false" />
+        <AssociationConnector Association="StockShopModel.FK__Employee__id_pos__7B264821" ManuallyRouted="false" />
+        <AssociationConnector Association="StockShopModel.FK__Income__id_emplo__7EF6D905" ManuallyRouted="false" />
+        <AssociationConnector Association="StockShopModel.FK__Outcome__id_empl__05A3D694" ManuallyRouted="false" />
+        <AssociationConnector Association="StockShopModel.FK__Log_incom__id_in__01D345B0" ManuallyRouted="false" />
+        <AssociationConnector Association="StockShopModel.FK__Log_incom__id_pr__02C769E9" ManuallyRouted="false" />
+        <AssociationConnector Association="StockShopModel.FK__Log_outco__id_ou__0880433F" ManuallyRouted="false" />
+        <AssociationConnector Association="StockShopModel.FK__Log_outco__id_pr__09746778" ManuallyRouted="false" />
+        <AssociationConnector Association="StockShopModel.FK__Product__id_unit__756D6ECB" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

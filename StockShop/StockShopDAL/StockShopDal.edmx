@@ -1,0 +1,637 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище StockShopModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_category" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_position" Type="int" Nullable="false" />
+          <Property Name="fio" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="255" />
+          <Property Name="passport" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="number_phone" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Income">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_employee" Type="int" Nullable="false" />
+          <Property Name="name_income" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="date_order_income" Type="date" Nullable="false" />
+          <Property Name="data_income" Type="date" Nullable="false" />
+          <Property Name="price_income" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Log_income">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_income" Type="int" Nullable="false" />
+          <Property Name="id_product" Type="int" Nullable="false" />
+          <Property Name="count_income_product" Type="int" Nullable="false" />
+          <Property Name="price_income_product" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Log_outcome">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_outcome" Type="int" Nullable="false" />
+          <Property Name="id_product" Type="int" Nullable="false" />
+          <Property Name="count_outcome_product" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Outcome">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_employee" Type="int" Nullable="false" />
+          <Property Name="date_order_outcome" Type="date" Nullable="false" />
+          <Property Name="date_delivery" Type="date" Nullable="false" />
+          <Property Name="name_outcome" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="price_outcome" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_salary" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="salary" Type="float" Nullable="false" />
+          <Property Name="charge" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_category" Type="int" Nullable="false" />
+          <Property Name="id_unity" Type="int" Nullable="false" />
+          <Property Name="name_product" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="count_product" Type="int" Nullable="false" />
+          <Property Name="price" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Unity">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_unity" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Employee__id_pos__7B264821">
+          <End Role="Position" Type="Self.Position" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="id_position" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Income__id_emplo__7EF6D905">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Income" Type="Self.Income" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Income">
+              <PropertyRef Name="id_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Log_incom__id_in__01D345B0">
+          <End Role="Income" Type="Self.Income" Multiplicity="1" />
+          <End Role="Log_income" Type="Self.Log_income" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Income">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Log_income">
+              <PropertyRef Name="id_income" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Log_incom__id_pr__02C769E9">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Log_income" Type="Self.Log_income" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Log_income">
+              <PropertyRef Name="id_product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Log_outco__id_ou__0880433F">
+          <End Role="Outcome" Type="Self.Outcome" Multiplicity="1" />
+          <End Role="Log_outcome" Type="Self.Log_outcome" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Outcome">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Log_outcome">
+              <PropertyRef Name="id_outcome" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Log_outco__id_pr__09746778">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Log_outcome" Type="Self.Log_outcome" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Log_outcome">
+              <PropertyRef Name="id_product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Outcome__id_empl__05A3D694">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Outcome" Type="Self.Outcome" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Outcome">
+              <PropertyRef Name="id_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__id_cate__74794A92">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="id_category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__id_unit__756D6ECB">
+          <End Role="Unity" Type="Self.Unity" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unity">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="id_unity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище StockShopModelContainer">
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Income" EntityType="Self.Income" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log_income" EntityType="Self.Log_income" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log_outcome" EntityType="Self.Log_outcome" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Outcome" EntityType="Self.Outcome" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Unity" EntityType="Self.Unity" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Employee__id_pos__7B264821" Association="Self.FK__Employee__id_pos__7B264821">
+            <End Role="Position" EntitySet="Position" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Income__id_emplo__7EF6D905" Association="Self.FK__Income__id_emplo__7EF6D905">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Income" EntitySet="Income" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Log_incom__id_in__01D345B0" Association="Self.FK__Log_incom__id_in__01D345B0">
+            <End Role="Income" EntitySet="Income" />
+            <End Role="Log_income" EntitySet="Log_income" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Log_incom__id_pr__02C769E9" Association="Self.FK__Log_incom__id_pr__02C769E9">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Log_income" EntitySet="Log_income" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Log_outco__id_ou__0880433F" Association="Self.FK__Log_outco__id_ou__0880433F">
+            <End Role="Outcome" EntitySet="Outcome" />
+            <End Role="Log_outcome" EntitySet="Log_outcome" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Log_outco__id_pr__09746778" Association="Self.FK__Log_outco__id_pr__09746778">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Log_outcome" EntitySet="Log_outcome" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Outcome__id_empl__05A3D694" Association="Self.FK__Outcome__id_empl__05A3D694">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Outcome" EntitySet="Outcome" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__id_cate__74794A92" Association="Self.FK__Product__id_cate__74794A92">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__id_unit__756D6ECB" Association="Self.FK__Product__id_unit__756D6ECB">
+            <End Role="Unity" EntitySet="Unity" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StockShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_category" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Product__id_cate__74794A92" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_position" Type="Int32" Nullable="false" />
+          <Property Name="fio" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="passport" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="number_phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Position" Relationship="Self.FK__Employee__id_pos__7B264821" FromRole="Employee" ToRole="Position" />
+          <NavigationProperty Name="Income" Relationship="Self.FK__Income__id_emplo__7EF6D905" FromRole="Employee" ToRole="Income" />
+          <NavigationProperty Name="Outcome" Relationship="Self.FK__Outcome__id_empl__05A3D694" FromRole="Employee" ToRole="Outcome" />
+        </EntityType>
+        <EntityType Name="Income">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_employee" Type="Int32" Nullable="false" />
+          <Property Name="name_income" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="date_order_income" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="data_income" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="price_income" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Income__id_emplo__7EF6D905" FromRole="Income" ToRole="Employee" />
+          <NavigationProperty Name="Log_income" Relationship="Self.FK__Log_incom__id_in__01D345B0" FromRole="Income" ToRole="Log_income" />
+        </EntityType>
+        <EntityType Name="Log_income">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_income" Type="Int32" Nullable="false" />
+          <Property Name="id_product" Type="Int32" Nullable="false" />
+          <Property Name="count_income_product" Type="Int32" Nullable="false" />
+          <Property Name="price_income_product" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Income" Relationship="Self.FK__Log_incom__id_in__01D345B0" FromRole="Log_income" ToRole="Income" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Log_incom__id_pr__02C769E9" FromRole="Log_income" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Log_outcome">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_outcome" Type="Int32" Nullable="false" />
+          <Property Name="id_product" Type="Int32" Nullable="false" />
+          <Property Name="count_outcome_product" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Outcome" Relationship="Self.FK__Log_outco__id_ou__0880433F" FromRole="Log_outcome" ToRole="Outcome" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Log_outco__id_pr__09746778" FromRole="Log_outcome" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Outcome">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_employee" Type="Int32" Nullable="false" />
+          <Property Name="date_order_outcome" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="date_delivery" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="name_outcome" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="price_outcome" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Outcome__id_empl__05A3D694" FromRole="Outcome" ToRole="Employee" />
+          <NavigationProperty Name="Log_outcome" Relationship="Self.FK__Log_outco__id_ou__0880433F" FromRole="Outcome" ToRole="Log_outcome" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_salary" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="salary" Type="Double" Nullable="false" />
+          <Property Name="charge" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Employee__id_pos__7B264821" FromRole="Position" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_category" Type="Int32" Nullable="false" />
+          <Property Name="id_unity" Type="Int32" Nullable="false" />
+          <Property Name="name_product" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="count_product" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Product__id_cate__74794A92" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="Log_income" Relationship="Self.FK__Log_incom__id_pr__02C769E9" FromRole="Product" ToRole="Log_income" />
+          <NavigationProperty Name="Log_outcome" Relationship="Self.FK__Log_outco__id_pr__09746778" FromRole="Product" ToRole="Log_outcome" />
+          <NavigationProperty Name="Unity" Relationship="Self.FK__Product__id_unit__756D6ECB" FromRole="Product" ToRole="Unity" />
+        </EntityType>
+        <EntityType Name="Unity">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_unity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Product__id_unit__756D6ECB" FromRole="Unity" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK__Product__id_cate__74794A92">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="id_category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employee__id_pos__7B264821">
+          <End Role="Position" Type="Self.Position" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="id_position" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Income__id_emplo__7EF6D905">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Income" Type="Self.Income" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Income">
+              <PropertyRef Name="id_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Outcome__id_empl__05A3D694">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Outcome" Type="Self.Outcome" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Outcome">
+              <PropertyRef Name="id_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Log_incom__id_in__01D345B0">
+          <End Role="Income" Type="Self.Income" Multiplicity="1" />
+          <End Role="Log_income" Type="Self.Log_income" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Income">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Log_income">
+              <PropertyRef Name="id_income" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Log_incom__id_pr__02C769E9">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Log_income" Type="Self.Log_income" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Log_income">
+              <PropertyRef Name="id_product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Log_outco__id_ou__0880433F">
+          <End Role="Outcome" Type="Self.Outcome" Multiplicity="1" />
+          <End Role="Log_outcome" Type="Self.Log_outcome" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Outcome">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Log_outcome">
+              <PropertyRef Name="id_outcome" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Log_outco__id_pr__09746778">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Log_outcome" Type="Self.Log_outcome" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Log_outcome">
+              <PropertyRef Name="id_product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__id_unit__756D6ECB">
+          <End Role="Unity" Type="Self.Unity" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unity">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="id_unity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StockShopEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Category" EntityType="Self.Category" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" />
+          <EntitySet Name="Income" EntityType="Self.Income" />
+          <EntitySet Name="Log_income" EntityType="Self.Log_income" />
+          <EntitySet Name="Log_outcome" EntityType="Self.Log_outcome" />
+          <EntitySet Name="Outcome" EntityType="Self.Outcome" />
+          <EntitySet Name="Position" EntityType="Self.Position" />
+          <EntitySet Name="Product" EntityType="Self.Product" />
+          <EntitySet Name="Unity" EntityType="Self.Unity" />
+          <AssociationSet Name="FK__Product__id_cate__74794A92" Association="Self.FK__Product__id_cate__74794A92">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employee__id_pos__7B264821" Association="Self.FK__Employee__id_pos__7B264821">
+            <End Role="Position" EntitySet="Position" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Income__id_emplo__7EF6D905" Association="Self.FK__Income__id_emplo__7EF6D905">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Income" EntitySet="Income" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Outcome__id_empl__05A3D694" Association="Self.FK__Outcome__id_empl__05A3D694">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Outcome" EntitySet="Outcome" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Log_incom__id_in__01D345B0" Association="Self.FK__Log_incom__id_in__01D345B0">
+            <End Role="Income" EntitySet="Income" />
+            <End Role="Log_income" EntitySet="Log_income" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Log_incom__id_pr__02C769E9" Association="Self.FK__Log_incom__id_pr__02C769E9">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Log_income" EntitySet="Log_income" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Log_outco__id_ou__0880433F" Association="Self.FK__Log_outco__id_ou__0880433F">
+            <End Role="Outcome" EntitySet="Outcome" />
+            <End Role="Log_outcome" EntitySet="Log_outcome" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Log_outco__id_pr__09746778" Association="Self.FK__Log_outco__id_pr__09746778">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Log_outcome" EntitySet="Log_outcome" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__id_unit__756D6ECB" Association="Self.FK__Product__id_unit__756D6ECB">
+            <End Role="Unity" EntitySet="Unity" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище StockShopModelContainer" CdmEntityContainer="StockShopEntities">
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="StockShopModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name_category" ColumnName="name_category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="StockShopModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_position" ColumnName="id_position" />
+                <ScalarProperty Name="fio" ColumnName="fio" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="passport" ColumnName="passport" />
+                <ScalarProperty Name="number_phone" ColumnName="number_phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Income">
+            <EntityTypeMapping TypeName="StockShopModel.Income">
+              <MappingFragment StoreEntitySet="Income">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_employee" ColumnName="id_employee" />
+                <ScalarProperty Name="name_income" ColumnName="name_income" />
+                <ScalarProperty Name="date_order_income" ColumnName="date_order_income" />
+                <ScalarProperty Name="data_income" ColumnName="data_income" />
+                <ScalarProperty Name="price_income" ColumnName="price_income" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Log_income">
+            <EntityTypeMapping TypeName="StockShopModel.Log_income">
+              <MappingFragment StoreEntitySet="Log_income">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_income" ColumnName="id_income" />
+                <ScalarProperty Name="id_product" ColumnName="id_product" />
+                <ScalarProperty Name="count_income_product" ColumnName="count_income_product" />
+                <ScalarProperty Name="price_income_product" ColumnName="price_income_product" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Log_outcome">
+            <EntityTypeMapping TypeName="StockShopModel.Log_outcome">
+              <MappingFragment StoreEntitySet="Log_outcome">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_outcome" ColumnName="id_outcome" />
+                <ScalarProperty Name="id_product" ColumnName="id_product" />
+                <ScalarProperty Name="count_outcome_product" ColumnName="count_outcome_product" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Outcome">
+            <EntityTypeMapping TypeName="StockShopModel.Outcome">
+              <MappingFragment StoreEntitySet="Outcome">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_employee" ColumnName="id_employee" />
+                <ScalarProperty Name="date_order_outcome" ColumnName="date_order_outcome" />
+                <ScalarProperty Name="date_delivery" ColumnName="date_delivery" />
+                <ScalarProperty Name="name_outcome" ColumnName="name_outcome" />
+                <ScalarProperty Name="price_outcome" ColumnName="price_outcome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Position">
+            <EntityTypeMapping TypeName="StockShopModel.Position">
+              <MappingFragment StoreEntitySet="Position">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name_salary" ColumnName="name_salary" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+                <ScalarProperty Name="charge" ColumnName="charge" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="StockShopModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_category" ColumnName="id_category" />
+                <ScalarProperty Name="id_unity" ColumnName="id_unity" />
+                <ScalarProperty Name="name_product" ColumnName="name_product" />
+                <ScalarProperty Name="count_product" ColumnName="count_product" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Unity">
+            <EntityTypeMapping TypeName="StockShopModel.Unity">
+              <MappingFragment StoreEntitySet="Unity">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name_unity" ColumnName="name_unity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
