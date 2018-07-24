@@ -1,11 +1,11 @@
 ﻿using System;
+using StockShop.StockShopModel;
 
-
-namespace StockShop.StockShopDAL.Repository
+namespace StockShop.StockShopDAL.Services
 {
-    class ServiceIncome : IEntity<Income>
+    class ServicePosition : IEntity<Position>
     {
-        public void CreateEntity(Income entity)
+        public void CreateEntity(Position entity)
         {
             if (entity == null)
             {
@@ -13,8 +13,7 @@ namespace StockShop.StockShopDAL.Repository
             }
             using (var context = new StockShopEntities())
             {
-                context.Income.Add(entity);
-
+                context.Position.Add(entity);
                 context.SaveChanges();
             }
         }
@@ -23,21 +22,21 @@ namespace StockShop.StockShopDAL.Repository
         {
             using (var context = new StockShopEntities())
             {
-                context.Income.Remove(context.Income.Find(id));
+                context.Position.Remove(context.Position.Find(id));
                 SaveChange();
             }
         }
 
-        public Income GetEntity(int id)
+        public Position GetEntity(int id)
         {
             using (var context = new StockShopEntities())
             {
-                var entity = context.Income.Find(id);
+                var entity = context.Position.Find(id);
                 return entity;
             }
         }
 
-        public void UpdateEntity(Income entity)
+        public void UpdateEntity(Position entity)
         {
             if (entity == null)
             {

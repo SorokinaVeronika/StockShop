@@ -46,6 +46,7 @@
     </Reference>
     <Reference Include="Microsoft.AspNet.Scaffolding.EntityFramework.12.0, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Data.Entity.Design.Extensibility, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Extension, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -67,51 +68,54 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StockShopDAL\Category.cs">
+    <Compile Include="StockShopModel\Category.cs">
       <DependentUpon>StockShopDal.tt</DependentUpon>
     </Compile>
-    <Compile Include="StockShopDAL\Employee.cs">
+    <Compile Include="StockShopModel\Employee.cs">
       <DependentUpon>StockShopDal.tt</DependentUpon>
     </Compile>
-    <Compile Include="StockShopDAL\Income.cs">
+    <Compile Include="StockShopModel\Income.cs">
       <DependentUpon>StockShopDal.tt</DependentUpon>
     </Compile>
-    <Compile Include="StockShopDAL\Interfaces\IEntity.cs" />
-    <Compile Include="StockShopDAL\Log_income.cs">
+    <Compile Include="Interfaces\IEntity.cs" />
+    <Compile Include="StockShopModel\Log_income.cs">
       <DependentUpon>StockShopDal.tt</DependentUpon>
     </Compile>
-    <Compile Include="StockShopDAL\Log_outcome.cs">
+    <Compile Include="StockShopModel\Log_outcome.cs">
       <DependentUpon>StockShopDal.tt</DependentUpon>
     </Compile>
-    <Compile Include="StockShopDAL\Outcome.cs">
+    <Compile Include="StockShopModel\Outcome.cs">
       <DependentUpon>StockShopDal.tt</DependentUpon>
     </Compile>
-    <Compile Include="StockShopDAL\Position.cs">
+    <Compile Include="StockShopModel\Position.cs">
       <DependentUpon>StockShopDal.tt</DependentUpon>
     </Compile>
-    <Compile Include="StockShopDAL\Product.cs">
+    <Compile Include="StockShopModel\Product.cs">
       <DependentUpon>StockShopDal.tt</DependentUpon>
     </Compile>
-    <Compile Include="StockShopDAL\Services\ServiceCategory.cs" />
-    <Compile Include="StockShopDAL\Services\ServicesEmployee.cs" />
-    <Compile Include="StockShopDAL\Services\ServicesIncome.cs" />
-    <Compile Include="StockShopDAL\Services\ServicesOutcome.cs" />
-    <Compile Include="StockShopDAL\StockShopDal.Context.cs">
+    <Compile Include="Services\ServiceCategory.cs" />
+    <Compile Include="Services\ServicePosition.cs" />
+    <Compile Include="Services\ServiceEmployee.cs" />
+    <Compile Include="Services\ServiceIncome.cs" />
+    <Compile Include="Services\ServiceOutcome.cs" />
+    <Compile Include="Services\ServiceProduct.cs" />
+    <Compile Include="Services\ServiceUnity.cs" />
+    <Compile Include="StockShopModel\StockShopDal.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>StockShopDal.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="StockShopDAL\StockShopDal.cs">
+    <Compile Include="StockShopModel\StockShopDal.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>StockShopDal.tt</DependentUpon>
     </Compile>
-    <Compile Include="StockShopDAL\StockShopDal.Designer.cs">
+    <Compile Include="StockShopModel\StockShopDal.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>StockShopDal.edmx</DependentUpon>
     </Compile>
-    <Compile Include="StockShopDAL\Unity.cs">
+    <Compile Include="StockShopModel\Unity.cs">
       <DependentUpon>StockShopDal.tt</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -120,11 +124,11 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-    <EntityDeploy Include="StockShopDAL\StockShopDal.edmx">
+    <EntityDeploy Include="StockShopModel\StockShopDal.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>StockShopDal.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="StockShopDAL\StockShopDal.edmx.diagram">
+    <None Include="StockShopModel\StockShopDal.edmx.diagram">
       <DependentUpon>StockShopDal.edmx</DependentUpon>
     </None>
   </ItemGroup>
@@ -136,12 +140,12 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="StockShopDAL\StockShopDal.Context.tt">
+    <Content Include="StockShopModel\StockShopDal.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>StockShopDal.edmx</DependentUpon>
       <LastGenOutput>StockShopDal.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="StockShopDAL\StockShopDal.tt">
+    <Content Include="StockShopModel\StockShopDal.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>StockShopDal.edmx</DependentUpon>
       <LastGenOutput>StockShopDal.cs</LastGenOutput>

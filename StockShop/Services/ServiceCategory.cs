@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Data.Entity;
+using StockShop.StockShopModel;
 
 namespace StockShop.StockShopDAL
 {
