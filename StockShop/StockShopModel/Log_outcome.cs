@@ -2,8 +2,6 @@
 
 namespace StockShop.StockShopModel
 {
-    using System;
-    using System.Collections.Generic;
     
     public partial class Log_outcome
     {
