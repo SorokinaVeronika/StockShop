@@ -105,11 +105,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>StockShopDal.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="StockShopModel\StockShopDal.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>StockShopDal.tt</DependentUpon>
-    </Compile>
     <Compile Include="StockShopModel\StockShopDal.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
